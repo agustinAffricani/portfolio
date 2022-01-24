@@ -1,8 +1,41 @@
 <?php
     $pg = "contacto";
+
+    if($_POST){
+        $nombre = $_POST["txtNombre"];
+        $correo = $_POST["txtCorreo"];
+        $telefono = $_POST["txtTelefono"];
+        $mensaje = $_POST["txtMensaje"];
+    
+
+        // Varios destinatarios
+        $para  = "agustin.affricani@gmail.com";
+
+        //mensaje
+        $cuerpo = "
+        Nombre = $nombre <br>
+        Correo = $correo <br>
+        Telefono = $telefono <br>
+        Mensaje = $mensaje";
+
+        // título
+        $titulo = "Mensaje desde tu pagina Web";
+
+        // Para enviar un correo HTML, debe establecerse la cabecera Content-type
+        $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Cabeceras adicionales
+        $cabeceras .= 'To: agustin.affricani@gmail.com' . "\r\n";
+        $cabeceras .= 'From: contacto@agustin.com.ar' . "\r\n";
+
+        // Enviarlo
+        mail($para, $titulo, $cuerpo, $cabeceras);
+        header("location: mensaje-enviado.php");
+    }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
